@@ -1,9 +1,15 @@
-import {Home} from "../pages/index"
+import { Routes, Route, } from "react-router-dom";
+
+import {Home, Sport} from "../pages/index"
 
 export const PagesRoutes = () => {
   return (
-    <div>
-      <Home/>
-    </div>
+    <Routes>
+       <Route path="/" element={<Home />} />
+       <Route path="/sport" element={<Sport />} />
+
+    </Routes>
+     
+    
   )
 }

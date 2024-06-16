@@ -1,14 +1,14 @@
+
 import { Footer } from "../../components/Footer/Footer";
 import { Header } from "../../components/Header/Header";
-import {AthletesList} from "../../components/index";
+import { SportDetail } from "../../components/index"
 
 
-
-export const Home = () => {
+export const Sport = () => {
   return (
     <>
     <Header/>
-    <AthletesList/>
+    <SportDetail/>
     <Footer/>
     </>
   )

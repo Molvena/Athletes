@@ -1,15 +1,15 @@
 import{
-    Card,
-    CardContent,
-    CardMedia,
-    Typography,
-    Box,
-    Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Box,
+  Button,
 } from "@mui/material";
 import {ThemeProvider} from '@mui/system';
 import { BaseTheme } from "../../themes/base";
 
-export const AthleteCard = ({athlete}) => {
+export const SportCard = ({sport}) => {
   return (
     <ThemeProvider theme={BaseTheme}>
     <Card
@@ -35,12 +35,12 @@ export const AthleteCard = ({athlete}) => {
           >
         <CardMedia
           component="img"
-          image={athlete.image}
-          alt={athlete.name}
+          image={sport.image}
+          alt={sport.name}
           sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
         </Box>
-    {/* Informacion del athleta--> La meto en un Box para poder ponerla en medio*/}
+    
         <Box
             sx={{
               width: '50%',              
@@ -59,24 +59,23 @@ export const AthleteCard = ({athlete}) => {
                     }}>
 
           <Typography gutterBottom variant="h3" component="div" noWrap>
-            {athlete.name}
+            {sport.name}
           </Typography>
          
           <Typography variant="body2" color="text.secondary">
-          Año Nacimiento{athlete.year}
+          Olímpico
           </Typography>   
           <Typography variant="body2" color="text.secondary">
-          Género:{athlete.gender}
+          Modalidades: {sport.modalidades}
           </Typography>       
           <Typography variant="body2" color="text.secondary">
-          País:{athlete.country}
+          más
           </Typography>  
               
        
         </CardContent>
         </Box>
- {/* Deporte--> La meto en un Box para poder ponerla a la derecha
- y le añado un boton que me llevará a la card de ese deporte*/}
+ 
         <Box
             sx={{
                width: '20%',
@@ -97,7 +96,7 @@ export const AthleteCard = ({athlete}) => {
               fontWeight: 'bold',
               }}          
           >
-            {athlete.sports}
+            {sport.athletes}
           </Button>
           <Button variant="contained" size="small" color="primary">
             Comentarios

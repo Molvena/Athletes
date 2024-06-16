@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import {PagesRoutes} from "./routes/index"
+import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "./context/index" ;
 
 import './App.css'
 
@@ -8,7 +10,11 @@ function App() {
 
   return (
     <>
-    <PagesRoutes/>
+    <BrowserRouter>
+      <AuthProvider>
+        <PagesRoutes/>
+      </AuthProvider>
+    </BrowserRouter>
 
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
@@ -16,9 +22,7 @@ function App() {
         </button>
         
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
     </>
   )
 }
