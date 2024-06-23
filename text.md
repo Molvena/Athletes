@@ -14,3 +14,14 @@
 
 /////Rutas
 -Crear las rutas
+
+
+////infoContext
+
+crear un context con un reducer para listar los atletas
+
+hook/ useFetch
+Comunicar front y back para pedirle el listado de atletas
+(ver useFetch de RepoPEdro/9-customHooks/ejercicio en clase)
+
+puedo poner como estado inicial el json de los atletas

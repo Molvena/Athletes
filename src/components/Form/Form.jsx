@@ -6,7 +6,7 @@ import {useAuth} from "../../hooks/index"
 
 
 
-function Formulario () {
+export const Form = ()=> {
   const {
     register,
     handleSubmit,
@@ -44,36 +44,9 @@ const { login } = useAuth();
         {errors.name && <p>{errors.name.message}</p>}
       </div>
 
-      <div>
-        <label htmlFor="surname">Apellidos</label>
-        <input 
-          type="text"
-          id="surname"
-          {...register("Apellido", {
-            required: true, 
-            min: {
-              value: 2,
-              message: 'El apellido debe tener al menos dos caracteres'
-            }
-          }
-        )} placeholder="Apellidos"
-        />
-        {errors.name && <p>{errors.name.message}</p>}
-      </div>
+      
 
-      <div>
-        <label htmlFor="birth">Fecha de nacimiento</label>
-        <input 
-          type="text"
-          id="birth"
-          {...register("birth", {
-              valueAsDate: true,
-          }
-        )} placeholder="Fecha de nacimiento"
-        />
-        {errors.name && <p>{errors.name.message}</p>}
-      </div>
-
+      
       <div>
         <label htmlFor='email'>Email</label>
         <input
@@ -111,5 +84,5 @@ const { login } = useAuth();
   )
 }
 
-export default Formulario
+
 

@@ -1,12 +1,12 @@
 import { Footer } from "../../components/Footer/Footer";
 import { Header } from "../../components/Header/Header";
-import { SportList } from "../../components/index";
+import { CommentsList } from "../../components/index";
 
-export const Sport = () => {
+export const Comments = () => {
   return (
     <>
       <Header />
-      <SportList />
+      <CommentsList />
       <Footer />
     </>
   );

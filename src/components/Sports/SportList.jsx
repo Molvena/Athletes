@@ -1,23 +1,22 @@
+import { useContext } from "react";
 import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
-import { AthleteCard } from "../index";
-import { useAthletes } from "../../hooks/index";
+import { SportCard } from "../index";
 import { InfoContext } from "../../context/index";
-import { useContext } from "react";
+import { useSports } from "../../hooks/index";
 
-export const AthletesList = () => {
+export const SportList = () => {
   const { state } = useContext(InfoContext);
-  console.log("state", state);
-  const { useGetAllAthletes } = useAthletes();
-  useGetAllAthletes();
+  const { useGetAllSports } = useSports();
+  useGetAllSports();
   return (
     <Container maxWidth="xl">
       {/* Contenedor de la lista de athletes */}
       <Stack container spacing={2} justifyContent="flex-start">
-        {state?.data?.map((athlete) => (
-          <Stack item key={athlete.id} xs={6} sm={6} md={8} lg={12}>
+        {state?.data?.map((sport) => (
+          <Stack item key={sport.id} xs={6} sm={6} md={8} lg={12}>
             {/* Card del athlete */}
-            <AthleteCard athlete={athlete} />
+            <SportCard sport={sport} />
           </Stack>
         ))}
       </Stack>

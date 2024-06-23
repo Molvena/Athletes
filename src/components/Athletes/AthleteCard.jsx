@@ -8,6 +8,7 @@ import{
 } from "@mui/material";
 import {ThemeProvider} from '@mui/system';
 import { BaseTheme } from "../../themes/base";
+import {NavLink, Link} from "react-router-dom";
 
 export const AthleteCard = ({athlete}) => {
   return (
@@ -70,9 +71,7 @@ export const AthleteCard = ({athlete}) => {
           </Typography>       
           <Typography variant="body2" color="text.secondary">
           País:{athlete.country}
-          </Typography>  
-              
-       
+          </Typography>                 
         </CardContent>
         </Box>
  {/* Deporte--> La meto en un Box para poder ponerla a la derecha
@@ -87,7 +86,7 @@ export const AthleteCard = ({athlete}) => {
                padding: 2,
               
             }}>
-
+          <NavLink to={`/sport/{athlete.sports[0]}`}>
           <Button variant="contained" size="large" color="secondary"
             sx={{
               width: '100px',
@@ -99,9 +98,12 @@ export const AthleteCard = ({athlete}) => {
           >
             {athlete.sports}
           </Button>
+          </NavLink>
+          <NavLink to={`/comments/${athlete.comments}`}>
           <Button variant="contained" size="small" color="primary">
             Comentarios
           </Button>
+          </NavLink>
 
           </Box>
     
