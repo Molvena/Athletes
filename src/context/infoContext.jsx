@@ -20,11 +20,16 @@ import { createContext, useReducer } from "react";
 const inicialState = { data: [] };
 
 export const InfoContext = createContext(inicialState);
+export const GET_ATHLETES = "GET_ATHLETES";
+export const GET_ATHLETE = "GET_ATHLETE";
+export const ADD_ATHLETES = "ADD_ATHLETES";
 
 function infoReducer(state, action) {
   console.log("action", action);
   switch (action.type) {
-    case "SET_DATA":
+    case "GET_ATHLETES":
+      return { ...state, data: action.payload };
+    case "ADD_ATHLETES":
       return { ...state, data: action.payload };
 
     default:

@@ -1,15 +1,14 @@
 import { Footer } from "../../components/Footer/Footer";
 import { Header } from "../../components/Header/Header";
-import {AthletesList} from "../../components/index";
-
-
+import { AthletesList, AthleteBar } from "../../components/index";
 
 export const Home = () => {
   return (
     <>
-    <Header/>
-    <AthletesList/>
-    <Footer/>
+      <Header />
+      <AthleteBar />
+      <AthletesList />
+      <Footer />
     </>
-  )
-}
+  );
+};

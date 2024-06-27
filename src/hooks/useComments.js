@@ -1,4 +1,4 @@
-import { useFetch } from "./index.jsx"
+import { useFetch } from "./index.js"
 
 export const useComments = () => {
     const useGetAllComments = async () => {

@@ -25,12 +25,12 @@ export const Header = () => {
             </IconButton>
 
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Header
+              Sports Web
             </Typography>
 
             {user && (
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                HOLA {user.name}
+                Hola {user.name}
               </Typography>
             )}
 

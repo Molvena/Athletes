@@ -16,7 +16,7 @@ export const CommentCard = ({ comment }) => {
       <Card
         sx={{
           display: "flex",
-          height: "180px",
+          height: "auto",
           width: "95vh",
           borderRadius: "40px",
           boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
@@ -55,7 +55,7 @@ export const CommentCard = ({ comment }) => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              justifyContent: "center",
+              justifyContent: "space-between",
               height: "100%",
             }}
           >
@@ -63,9 +63,17 @@ export const CommentCard = ({ comment }) => {
               {comment?.recipientAthlete?.name}
             </Typography>
 
-            <Typography variant="body2" color="text.secondary">
-              Comentario{comment.content}
-            </Typography>
+            <Box
+              sx={{
+                flex: 1,
+                overflowY: "auto",
+                mt: 2,
+              }}
+            >
+              <Typography variant="body2" color="text.secondary">
+                Comentario{comment.content}
+              </Typography>
+            </Box>
           </CardContent>
         </Box>
       </Card>
