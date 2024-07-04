@@ -2,14 +2,19 @@ import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
 import { AthleteCard } from "../index";
 import { useAthletes } from "../../hooks/index";
-import { InfoContext } from "../../context/index";
-import { useContext } from "react";
+import { AthleteContext } from "../../context/index";
+import { useContext, useEffect } from "react";
 
 export const AthletesList = () => {
-  const { state } = useContext(InfoContext);
-  console.log("state", state);
-  const { useGetAllAthletes } = useAthletes();
-  useGetAllAthletes();
+  const { state } = useContext(AthleteContext);
+  console.log("state Athletes", state);
+  const { getAllAthletes } = useAthletes();
+  useEffect(() => {
+    if (!state.data || state.data.length === 0) {
+      getAllAthletes();
+    }
+  }, [getAllAthletes, state.data]);
+
   return (
     <Container maxWidth="xl">
       {/* Contenedor de la lista de athletes */}

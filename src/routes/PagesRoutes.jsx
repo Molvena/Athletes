@@ -5,9 +5,10 @@ import {
   Sport,
   Login,
   Settings,
-  Comments,
+  // Comments,
   CreateSport,
   CreateAthlete,
+  UpdateAthlete,
 } from "../pages/index";
 
 import { HomeLayout, ProtectedLayout } from "../components/index";
@@ -17,7 +18,7 @@ export const PagesRoutes = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/sports" element={<Sport />} />
-      <Route path="/comments" element={<Comments />} />
+      {/* <Route path="/comments" element={<Comments />} /> */}
 
       <Route element={<HomeLayout />}>
         <Route path="/login" element={<Login />} />
@@ -27,6 +28,7 @@ export const PagesRoutes = () => {
         <Route path="settings" element={<Settings />} />
         <Route path="CreateSport" element={<CreateSport />} />
         <Route path="CreateAthlete" element={<CreateAthlete />} />
+        <Route path="UpdateAthlete/:id" element={<UpdateAthlete />} />
       </Route>
     </Routes>
   );

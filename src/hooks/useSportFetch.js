@@ -1,7 +1,6 @@
 //Comunicar el front y el back para pedirle el listado de athletes
 
-import { useState, useEffect, useContext } from "react";
-import { InfoContext } from "../context/infoContext";
+
 
 // type options = {
 //   method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -16,31 +15,39 @@ import { InfoContext } from "../context/infoContext";
 //   referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
 //   body: JSON.stringify(data) // body data type must match "Content-Type" header
 // }
+import { useContext, useEffect, useState, useCallback } from "react";
+import { SportContext } from "../context/index.jsx";
 
-export const useFetch = (url, typeAction, options) => {
-  const { dispatch } = useContext(InfoContext);
-
-  const [loading, setLoading] = useState(true);
+export const useSportFetch = () => {
+  const { dispatch } = useContext(SportContext);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const fetchData = useCallback(async (url, typeAction,options = {}) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch(url, options);
+      const result = await response.json();
+      dispatch({ type: typeAction, payload: result });
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  }, [dispatch]);
+
   useEffect(() => {
-    const fecthData = async () => {
-      try {
-        const response = await fetch(url, options);
-        const result = await response.json();
-        console.log("result",result);
-        dispatch({ type: typeAction, payload: result });
-       
-      } catch (e) {
-        setError(e);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fecthData();
-  }, [url, dispatch, typeAction]);
+    fetchData();
+  }, [fetchData]);
 
-
-  return { loading, error };
+  return { loading, error, fetchData };
 };
+
+
+
+
+
+
+
 

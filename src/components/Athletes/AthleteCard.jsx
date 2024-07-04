@@ -8,18 +8,28 @@ import {
 } from "@mui/material";
 import { ThemeProvider } from "@mui/system";
 import { BaseTheme } from "../../themes/base";
-import { NavLink, Link } from "react-router-dom";
-import { useSports } from "../../hooks";
+import { NavLink } from "react-router-dom";
+import { useAthletes } from "../../hooks";
 
 export const AthleteCard = ({ athlete }) => {
-  const { useGetSportById } = useSports();
+  //const { getSportById } = useSports();
+  const { deleteAthleteById } = useAthletes();
+  const deleteAthlete = async () => {
+    try {
+      await deleteAthleteById(athlete._id);
+      // Aquí puedes añadir cualquier lógica adicional que necesites, como actualizar la lista de atletas.
+      console.log(`El atleta ${athlete.name} ha sido eliminado.`);
+    } catch (error) {
+      console.error("Error al eliminar el atleta:", error);
+    }
+  };
 
   return (
     <ThemeProvider theme={BaseTheme}>
       <Card
         sx={{
           display: "flex",
-          height: "180px",
+          height: "250px",
           width: "95vh",
           borderRadius: "40px",
           boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
@@ -89,33 +99,62 @@ export const AthleteCard = ({ athlete }) => {
             padding: 2,
           }}
         >
-          <NavLink
-            to={
-              athlete.sports && athlete.sports[0]
-                ? `/sport/${athlete.sports[0]._id}`
-                : "#"
-            }
-          >
+          <Box>
+            <NavLink
+              to={
+                athlete.sports && athlete.sports[0]
+                  ? `/sport/${athlete.sports[0]._id}`
+                  : "#"
+              }
+            >
+              <Button
+                variant="contained"
+                size="large"
+                color="secondary"
+                sx={{
+                  width: "100px",
+                  height: "100px",
+                  borderRadius: "50px",
+                  marginBottom: 1,
+                  fontWeight: "bold",
+                }}
+              >
+                {athlete.sports && athlete.sports[0]
+                  ? athlete.sports[0].name
+                  : "Sin Deporte"}
+              </Button>
+            </NavLink>
+          </Box>
+          <NavLink to={`/comments/${athlete.comments}`}>
             <Button
               variant="contained"
-              size="large"
-              color="secondary"
+              size="small"
+              color="primary"
               sx={{
-                width: "100px",
-                height: "100px",
-                borderRadius: "50px",
-                marginBottom: 2,
-                fontWeight: "bold",
+                marginBottom: 1,
               }}
             >
-              {athlete.sports && athlete.sports[0]
-                ? athlete.sports[0].name
-                : "Sin Deporte"}
+              Comentarios
             </Button>
           </NavLink>
-          <NavLink to={`/comments/${athlete.comments}`}>
-            <Button variant="contained" size="small" color="primary">
-              Comentarios
+          <Button
+            variant="outlined"
+            size="small"
+            color="primary"
+            onClick={deleteAthlete}
+          >
+            Eliminar
+          </Button>
+          <NavLink to={`/dashboard/UpdateAthlete/${athlete._id}`}>
+            <Button
+              variant="outlined"
+              size="small"
+              color="primary"
+              sx={{
+                marginBottom: 1,
+              }}
+            >
+              Editar
             </Button>
           </NavLink>
         </Box>

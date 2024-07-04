@@ -2,7 +2,11 @@ import { useState } from "react";
 import { PagesRoutes } from "./routes/index";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/index";
-import { InfoProvider } from "./context/infoContext";
+import {
+  AthleteProvider,
+  SportProvider,
+  CommentProvider,
+} from "./context/index";
 
 import "./App.css";
 
@@ -13,9 +17,13 @@ function App() {
     <>
       <BrowserRouter>
         <AuthProvider>
-          <InfoProvider>
-            <PagesRoutes />
-          </InfoProvider>
+          <AthleteProvider>
+            <SportProvider>
+              <CommentProvider>
+                <PagesRoutes />
+              </CommentProvider>
+            </SportProvider>
+          </AthleteProvider>
         </AuthProvider>
       </BrowserRouter>
 

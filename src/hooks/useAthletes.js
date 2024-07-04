@@ -1,20 +1,41 @@
-import { useFetch } from "./index.js"
-import {GET_ATHLETES, GET_ATHLETE, ADD_ATHLETES} from "../context/infoContext.jsx"
+import {useAthleteFetch} from "./index.js"
+import {GET_ATHLETES, GET_ATHLETE, ADD_ATHLETES, UPDATE_ATHLETES, DELETE_ATHLETES} from "../context/AthleteContext.jsx"
 
 
 export const useAthletes = () => {
-  const useGetAllAthletes = async () => {
-        useFetch("http://localhost:8081/api/v1/athlete/getAllAthletes", GET_ATHLETES)
-  }
-  const useGetById = async (id) => {
-    useFetch(`http://localhost:8081/api/v1/athlete/getById/${id}`, GET_ATHLETE)
-}
-  const UseAddAthletes = async (data) => {
-    useFetch(`http://localhost:8081/api/v1/athlete/create`, ADD_ATHLETES, {body:data, method: 'POST'}) ;
+  const {fetchData} = useAthleteFetch();
 
-  
+  const getAllAthletes = async () => {
+    fetchData("http://localhost:8081/api/v1/athlete/getAllAthletes", GET_ATHLETES)
+  }
+  const getAthleteById = async (id) => {
+      //podria poner tb aqui solo return por delante
+    const response =fetchData(`http://localhost:8081/api/v1/athlete/getById/${id}`, GET_ATHLETE)
+    
+    return response
+//en esta tengo que poner el return porque es una llamada directa a la api sin tener contexto
+    
 }
-return {useGetAllAthletes, useGetById, UseAddAthletes}
+  const addAthletes = async (data) => {
+    fetchData("http://localhost:8081/api/v1/athlete/create", ADD_ATHLETES, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+  };
+  const updateAthletes = async (id, data) => {
+    fetchData(`http://localhost:8081/api/v1/athlete/update/${id}`, UPDATE_ATHLETES, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+  };
+  const deleteAthleteById = async (id) => {
+    fetchData(`http://localhost:8081/api/v1/athlete/deleteAthlete/${id}`, DELETE_ATHLETES, {
+       method: "DELETE"})
+  }
+
+return {getAllAthletes, getAthleteById, addAthletes, updateAthletes, deleteAthleteById}
 }
 
 

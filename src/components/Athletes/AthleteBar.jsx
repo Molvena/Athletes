@@ -1,11 +1,4 @@
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  IconButton,
-  Box,
-} from "@mui/material";
+import { AppBar, Typography, Button, Box } from "@mui/material";
 
 import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../../hooks/index";
@@ -54,6 +47,15 @@ export const AthleteBar = () => {
               {user && (
                 <Button variant="text" color="secondary">
                   Crear nuevo deportista
+                </Button>
+              )}
+            </Link>
+
+            <Link to="dashboard/UpdateAthlete" replace>
+              {/* Aqui le pongo la condicion para que solo me rederice el boton si existe user */}
+              {user && (
+                <Button variant="text" color="secondary">
+                  Modificar deportista
                 </Button>
               )}
             </Link>

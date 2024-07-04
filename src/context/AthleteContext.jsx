@@ -19,17 +19,22 @@ import { createContext, useReducer } from "react";
 
 const inicialState = { data: [] };
 
-export const InfoContext = createContext(inicialState);
+export const AthleteContext = createContext(inicialState);
 export const GET_ATHLETES = "GET_ATHLETES";
 export const GET_ATHLETE = "GET_ATHLETE";
 export const ADD_ATHLETES = "ADD_ATHLETES";
+export const UPDATE_ATHLETES = "UPDATE_ATHLETES";
+export const DELETE_ATHLETES = "DELETE_ATHLETES";
 
 function infoReducer(state, action) {
-  console.log("action", action);
   switch (action.type) {
     case "GET_ATHLETES":
       return { ...state, data: action.payload };
     case "ADD_ATHLETES":
+      return { ...state, data: action.payload };
+    case "UPDATE_ATHLETES":
+      return { ...state, data: action.payload };
+    case "DELETE_ATHLETES":
       return { ...state, data: action.payload };
 
     default:
@@ -37,11 +42,11 @@ function infoReducer(state, action) {
   }
 }
 
-export const InfoProvider = ({ children }) => {
+export const AthleteProvider = ({ children }) => {
   const [state, dispatch] = useReducer(infoReducer, []);
   return (
-    <InfoContext.Provider value={{ state, dispatch }}>
+    <AthleteContext.Provider value={{ state, dispatch }}>
       {children}
-    </InfoContext.Provider>
+    </AthleteContext.Provider>
   );
 };
