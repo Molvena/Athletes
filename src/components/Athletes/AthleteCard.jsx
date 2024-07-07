@@ -13,12 +13,14 @@ import { useAthletes } from "../../hooks";
 
 export const AthleteCard = ({ athlete }) => {
   //const { getSportById } = useSports();
-  const { deleteAthleteById } = useAthletes();
+  const { deleteAthleteById, getAllAthletes } = useAthletes();
   const deleteAthlete = async () => {
     try {
       await deleteAthleteById(athlete._id);
+
       // Aquí puedes añadir cualquier lógica adicional que necesites, como actualizar la lista de atletas.
       console.log(`El atleta ${athlete.name} ha sido eliminado.`);
+      await getAllAthletes();
     } catch (error) {
       console.error("Error al eliminar el atleta:", error);
     }
@@ -29,7 +31,7 @@ export const AthleteCard = ({ athlete }) => {
       <Card
         sx={{
           display: "flex",
-          height: "250px",
+          height: "180px",
           width: "95vh",
           borderRadius: "40px",
           boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
@@ -75,16 +77,38 @@ export const AthleteCard = ({ athlete }) => {
             <Typography gutterBottom variant="h3" component="div" noWrap>
               {athlete.name}
             </Typography>
-
-            <Typography variant="body2" color="text.secondary">
-              Año Nacimiento{athlete.year}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Género:{athlete.gender}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              País:{athlete.country}
-            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-around",
+                margin: 0,
+              }}
+            >
+              <Typography variant="body2" color="text.secondary">
+                Año Nacimiento{athlete.year}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Género:{athlete.gender}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                País:{athlete.country}
+              </Typography>
+            </Box>
+            <NavLink to={`/comments/${athlete.comments}`}>
+              <Button
+                variant="contained"
+                size="small"
+                color="secondary"
+                sx={{
+                  marginBottom: 1,
+                  width: "30%",
+                  margin: "10px auto 0px",
+                }}
+              >
+                Comentarios
+              </Button>
+            </NavLink>
           </CardContent>
         </Box>
         {/* Deporte--> La meto en un Box para poder ponerla a la derecha
@@ -110,7 +134,7 @@ export const AthleteCard = ({ athlete }) => {
               <Button
                 variant="contained"
                 size="large"
-                color="secondary"
+                color="primary"
                 sx={{
                   width: "100px",
                   height: "100px",
@@ -125,38 +149,41 @@ export const AthleteCard = ({ athlete }) => {
               </Button>
             </NavLink>
           </Box>
-          <NavLink to={`/comments/${athlete.comments}`}>
-            <Button
-              variant="contained"
-              size="small"
-              color="primary"
-              sx={{
-                marginBottom: 1,
-              }}
-            >
-              Comentarios
-            </Button>
-          </NavLink>
-          <Button
-            variant="outlined"
-            size="small"
-            color="primary"
-            onClick={deleteAthlete}
+          <Box
+            sx={{
+              width: "100%",
+              alignItems: "center",
+              justifyContent: "center",
+              display: "flex",
+            }}
           >
-            Eliminar
-          </Button>
-          <NavLink to={`/dashboard/UpdateAthlete/${athlete._id}`}>
             <Button
               variant="outlined"
               size="small"
               color="primary"
+              onClick={deleteAthlete}
               sx={{
                 marginBottom: 1,
+                padding: "0 5 0 2",
+                margin: 1,
               }}
             >
-              Editar
+              Eliminar
             </Button>
-          </NavLink>
+            <NavLink to={`/dashboard/UpdateAthlete/${athlete._id}`}>
+              <Button
+                variant="outlined"
+                size="small"
+                color="primary"
+                sx={{
+                  marginBottom: 1,
+                  margin: 1,
+                }}
+              >
+                Editar
+              </Button>
+            </NavLink>
+          </Box>
         </Box>
       </Card>
     </ThemeProvider>

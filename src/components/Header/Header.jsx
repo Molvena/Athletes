@@ -11,7 +11,16 @@ export const Header = () => {
   return (
     <>
       <ThemeProvider theme={BaseTheme}>
-        <AppBar position="static">
+        <AppBar
+          position="static"
+          sx={{
+            display: "flex",
+
+            justifyContent: "space-between",
+            padding: "0 20px",
+            borderRadius: "30px 30px 0 0",
+          }}
+        >
           <Toolbar>
             {/* Botón del menú */}
             <IconButton
@@ -24,43 +33,91 @@ export const Header = () => {
               <MenuIcon />
             </IconButton>
 
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1, color: "#9cc5b5" }}
+            >
               Sports Web
             </Typography>
 
             {user && (
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{ flexGrow: 1, color: "#9cc5b5" }}
+              >
                 Hola {user.name}
               </Typography>
             )}
 
             <NavLink to="/sports">
-              <Button variant="text" color="inherit">
+              <Button
+                variant="text"
+                sx={{
+                  color: "#9cc5b5",
+                  "&:hover": {
+                    color: "#d4e6df",
+                  },
+                }}
+              >
                 DEPORTES
               </Button>
             </NavLink>
 
             <NavLink to="/">
-              <Button variant="text" color="inherit">
+              <Button
+                variant="text"
+                sx={{
+                  color: "#9cc5b5",
+                  "&:hover": {
+                    color: "#d4e6df",
+                  },
+                }}
+              >
                 DEPORTISTAS
               </Button>
             </NavLink>
 
             <NavLink to="/comments">
-              <Button variant="text" color="inherit">
+              <Button
+                variant="text"
+                sx={{
+                  color: "#9cc5b5",
+                  "&:hover": {
+                    color: "#d4e6df",
+                  },
+                }}
+              >
                 Comentarios
               </Button>
             </NavLink>
 
             <NavLink to="/">
-              <Button variant="text" color="inherit">
+              <Button
+                variant="text"
+                sx={{
+                  color: "#9cc5b5",
+                  "&:hover": {
+                    color: "#d4e6df",
+                  },
+                }}
+              >
                 HOME
               </Button>
             </NavLink>
 
             <NavLink to="/login">
               {!user && (
-                <Button variant="text" color="inherit">
+                <Button
+                  variant="text"
+                  sx={{
+                    color: "#9cc5b5",
+                    "&:hover": {
+                      color: "#d4e6df",
+                    },
+                  }}
+                >
                   LOGIN
                 </Button>
               )}
@@ -69,7 +126,16 @@ export const Header = () => {
             <NavLink to="/">
               {/* Aqui le pongo la condicion para que solo me rederice el boton si existe user */}
               {user && (
-                <Button variant="text" color="inherit" onClick={logout}>
+                <Button
+                  variant="text"
+                  sx={{
+                    color: "#9cc5b5",
+                    "&:hover": {
+                      color: "#d4e6df",
+                    },
+                  }}
+                  onClick={logout}
+                >
                   LOGOUT
                 </Button>
               )}
@@ -78,7 +144,15 @@ export const Header = () => {
             <Link to="dashboard/settings" replace>
               {/* Aqui le pongo la condicion para que solo me rederice el boton si existe user */}
               {user && (
-                <Button variant="text" color="inherit">
+                <Button
+                  variant="text"
+                  sx={{
+                    color: "#9cc5b5",
+                    "&:hover": {
+                      color: "#d4e6df",
+                    },
+                  }}
+                >
                   SETTINGS
                 </Button>
               )}

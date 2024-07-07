@@ -17,6 +17,8 @@ export const AthleteBar = () => {
             flexDirection: "row",
             justifyContent: "space-between",
             padding: "0 20px",
+            margin: "0 0 10px 0",
+            borderRadius: "0 0 30px 30px",
           }}
         >
           <Box
@@ -47,15 +49,6 @@ export const AthleteBar = () => {
               {user && (
                 <Button variant="text" color="secondary">
                   Crear nuevo deportista
-                </Button>
-              )}
-            </Link>
-
-            <Link to="dashboard/UpdateAthlete" replace>
-              {/* Aqui le pongo la condicion para que solo me rederice el boton si existe user */}
-              {user && (
-                <Button variant="text" color="secondary">
-                  Modificar deportista
                 </Button>
               )}
             </Link>

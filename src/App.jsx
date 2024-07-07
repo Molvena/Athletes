@@ -26,12 +26,6 @@ function App() {
           </AthleteProvider>
         </AuthProvider>
       </BrowserRouter>
-
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
     </>
   );
 }

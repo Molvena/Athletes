@@ -30,6 +30,8 @@ function infoReducer(state, action) {
   switch (action.type) {
     case "GET_ATHLETES":
       return { ...state, data: action.payload };
+    case "GET_ATHLETE":
+      return { ...state, data: action.payload };
     case "ADD_ATHLETES":
       return { ...state, data: action.payload };
     case "UPDATE_ATHLETES":
@@ -43,7 +45,7 @@ function infoReducer(state, action) {
 }
 
 export const AthleteProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(infoReducer, []);
+  const [state, dispatch] = useReducer(infoReducer, inicialState);
   return (
     <AthleteContext.Provider value={{ state, dispatch }}>
       {children}

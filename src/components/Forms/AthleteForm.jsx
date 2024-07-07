@@ -13,23 +13,24 @@ export const AthleteForm = () => {
     reset,
   } = useForm();
   const { stateSport } = useContext(SportContext);
-  const { addAthletes } = useAthletes();
+  const { addAthletes, getAllAthletes } = useAthletes();
   console.log("stateSport", stateSport.dataSport);
 
   const navigate = useNavigate();
   const [successMessage, setSuccessMessage] = useState("");
   const [formVisible, setFormVisible] = useState(true);
+
   const { getAllSports } = useSports();
   useEffect(() => {
     getAllSports();
   }, []);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     // Convertir el campo sports a un array
 
     data.sports = data.sports.split(",").map((sport) => sport.trim());
     //console.log("data", data);
-    addAthletes(data).then(() => {
+    await addAthletes(data).then(() => {
       reset();
       // Mostrar mensaje de creacion correcta
       setFormVisible(false);
@@ -40,6 +41,7 @@ export const AthleteForm = () => {
         navigate("/");
       }, 3000); // 2 segundos de retraso
     });
+    await getAllAthletes();
   };
   //Necesito enviar estos datos a mi estado global
   //Necesito redirigir a mi usuario al listado de atletas

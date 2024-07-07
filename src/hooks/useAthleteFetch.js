@@ -9,7 +9,7 @@ export const useAthleteFetch = () => {
  
 
   const fetchData = useCallback(async (url, typeAction,options = {}) => {
-    console.log("🚀 ~ fetchData ~ url:", url)
+    //console.log("🚀 ~ fetchData ~ url:", url)
     
     setLoading(true);
     setError(null);
@@ -25,9 +25,7 @@ export const useAthleteFetch = () => {
     }
   }, [dispatch]);
 
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+
 
   return { loading, error, fetchData };
 };

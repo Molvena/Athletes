@@ -1,11 +1,4 @@
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  IconButton,
-  Box,
-} from "@mui/material";
+import { AppBar, Typography, Button, Box } from "@mui/material";
 
 import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../../hooks/index";
@@ -24,6 +17,8 @@ export const SportBar = () => {
             flexDirection: "row",
             justifyContent: "space-between",
             padding: "0 20px",
+            margin: "0 0 10px 0",
+            borderRadius: "0 0 30px 30px",
           }}
         >
           <Box

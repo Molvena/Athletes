@@ -19,9 +19,9 @@ export const SportList = () => {
   return (
     <Container maxWidth="xl">
       {/* Contenedor de la lista de sports */}
-      <Stack container spacing={2} justifyContent="flex-start">
+      <Stack spacing={2} justifyContent="flex-start">
         {stateSport?.dataSport?.map((sport) => (
-          <Stack item key={sport.id} xs={6} sm={6} md={8} lg={12}>
+          <Stack key={sport._id} xs={6} sm={6} md={8} lg={12}>
             {/* Card del athlete */}
             <SportCard sport={sport} />
           </Stack>

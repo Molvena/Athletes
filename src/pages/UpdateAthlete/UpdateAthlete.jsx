@@ -11,7 +11,6 @@ export const UpdateAthlete = () => {
 
   return (
     <>
-      <div>UpdateAthlete</div>
       <Header />
       <UpdateAthleteForm athleteId={id} />
       <Footer />
