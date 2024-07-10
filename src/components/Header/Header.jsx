@@ -15,7 +15,6 @@ export const Header = () => {
           position="static"
           sx={{
             display: "flex",
-
             justifyContent: "space-between",
             padding: "0 20px",
             borderRadius: "30px 30px 0 0",
@@ -32,14 +31,6 @@ export const Header = () => {
             >
               <MenuIcon />
             </IconButton>
-
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{ flexGrow: 1, color: "#9cc5b5" }}
-            >
-              Sports Web
-            </Typography>
 
             {user && (
               <Typography

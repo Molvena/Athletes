@@ -1,12 +1,28 @@
-import { Header, UserForm, Footer } from "../../components/index";
+import { Header, UserForm, Footer, HeaderBar } from "../../components/index";
+import { Box } from "@mui/material";
 
 export const Login = () => {
   return (
-    <>
-      <div>login</div>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "90vh",
+      }}
+    >
       <Header />
-      <UserForm />
+      <HeaderBar />
+      <Box
+        sx={{
+          flex: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <UserForm />
+      </Box>
       <Footer />
-    </>
+    </Box>
   );
 };

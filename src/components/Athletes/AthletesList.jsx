@@ -7,7 +7,7 @@ import { useContext, useEffect } from "react";
 
 export const AthletesList = () => {
   const { state } = useContext(AthleteContext);
-  console.log("state Athletes", state);
+  //console.log("state Athletes", state);
   const { getAllAthletes } = useAthletes();
   useEffect(() => {
     if (!state.data || state.data.length === 0) {

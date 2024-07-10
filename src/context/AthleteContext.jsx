@@ -30,14 +30,22 @@ function infoReducer(state, action) {
   switch (action.type) {
     case "GET_ATHLETES":
       return { ...state, data: action.payload };
-    case "GET_ATHLETE":
-      return { ...state, data: action.payload };
+    // case "GET_ATHLETE":
+    //   return { ...state, data: action.payload };
     case "ADD_ATHLETES":
       return { ...state, data: action.payload };
     case "UPDATE_ATHLETES":
-      return { ...state, data: action.payload };
+      return {
+        ...state,
+        data: state.data.map((athlete) =>
+          athlete._id === action.payload._id ? action.payload : athlete
+        ),
+      };
     case "DELETE_ATHLETES":
-      return { ...state, data: action.payload };
+      return {
+        ...state,
+        data: state.data.filter((athlete) => athlete._id !== action.payload),
+      };
 
     default:
       return state;

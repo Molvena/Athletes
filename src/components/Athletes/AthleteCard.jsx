@@ -10,17 +10,20 @@ import { ThemeProvider } from "@mui/system";
 import { BaseTheme } from "../../themes/base";
 import { NavLink } from "react-router-dom";
 import { useAthletes } from "../../hooks";
+import { AthleteContext } from "../../context";
+import { useContext } from "react";
 
 export const AthleteCard = ({ athlete }) => {
   //const { getSportById } = useSports();
   const { deleteAthleteById, getAllAthletes } = useAthletes();
+  const { state } = useContext(AthleteContext);
+
   const deleteAthlete = async () => {
     try {
       await deleteAthleteById(athlete._id);
-
-      // Aquí puedes añadir cualquier lógica adicional que necesites, como actualizar la lista de atletas.
-      console.log(`El atleta ${athlete.name} ha sido eliminado.`);
       await getAllAthletes();
+
+      console.log(`El atleta ${athlete.name} ha sido eliminado.`);
     } catch (error) {
       console.error("Error al eliminar el atleta:", error);
     }

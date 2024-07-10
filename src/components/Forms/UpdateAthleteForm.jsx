@@ -4,29 +4,40 @@ import { useAthletes } from "../../hooks/useAthletes";
 import { useNavigate } from "react-router-dom";
 import { useSports } from "../../hooks/index";
 import { SportContext } from "../../context/index";
+import { Box } from "@mui/material";
 
 export const UpdateAthleteForm = ({ athleteId }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-    getValues,
-  } = useForm();
-
   const [defaultSport, setDefaultSport] = useState();
 
   const { stateSport } = useContext(SportContext);
-
+  const [athleteDefault, setAthleteDefault] = useState();
   const { updateAthletes, getAthleteById, getAllAthletes } = useAthletes();
   const { getAllSports } = useSports();
   const navigate = useNavigate();
   const [successMessage, setSuccessMessage] = useState("");
   const [formVisible, setFormVisible] = useState(true);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    getValues,
+    reset,
+  } = useForm({
+    //   defaultValues: {
+    //     name: athleteDefault?.name || "",
+    //     year: athleteDefault?.year || "",
+    //     gender: athleteDefault?.gender || "",
+    //     country: athleteDefault?.country || "",
+    //     sports: athleteDefault?.sports[0]._id || "",
+    //   },
+  });
+  //console.log("🚀 ~ UpdateAthleteForm ~ athleteDefault:", athleteDefault);
   useEffect(() => {
+    //cargamos todos los deportes
     getAllSports();
-  }, [getAllSports]);
+  }, []);
 
   useEffect(() => {
     const getAthlete = async () => {
@@ -34,13 +45,22 @@ export const UpdateAthleteForm = ({ athleteId }) => {
         const athlete = await getAthleteById(athleteId);
         //console.log("🚀 ~ getAthlete ~ athlete:", athlete);
 
-        //console.log("🚀 ~ getAthlete ~ athlete.sports[0]:", athlete.sports[0]);
+        console.log("🚀 ~ getAthlete ~ athlete.sports[0]:", athlete.sports[0]);
         if (athlete) {
+          setAthleteDefault(athlete);
           setValue("name", athlete.name);
           setValue("gender", athlete.gender);
           setValue("year", athlete.year);
           setValue("country", athlete.country);
-          setDefaultSport(athlete.sports[0].name);
+          setDefaultSport(athlete.sports[0]);
+          // Establecemos los valores del formulario usando reset para todos los campos
+          reset({
+            name: athlete.name,
+            gender: athlete.gender,
+            year: athlete.year,
+            country: athlete.country,
+            sports: athlete.sports[0]._id,
+          });
         }
       } catch (error) {
         console.error("Error al cargar el atleta:", error);
@@ -51,18 +71,19 @@ export const UpdateAthleteForm = ({ athleteId }) => {
   }, []);
 
   const onSubmit = async (data) => {
+    console.log("data sin modificar", data);
     // Convertir el campo sports a un array
-    data.sports = data.sports.split(",").map((sport) => sport.trim());
-    await updateAthletes(data);
+    data.sports = [data.sports];
+    await updateAthletes(athleteId, data);
     await getAllAthletes();
     // Mostrar mensaje de creacion correcta
     setFormVisible(false);
     setSuccessMessage("El atleta se ha modificado correctamente.");
-    console.log("data", data);
+    //console.log("data", data);
     // Redirigir al listado de atletas después de un tiempo
     setTimeout(() => {
       navigate("/");
-    }, 3000); // 2 segundos de retraso
+    }, 2000); // 2 segundos de retraso
 
     //Necesito enviar estos datos a mi estado global
     //Necesito redirigir a mi usuario al listado de atletas
@@ -127,12 +148,19 @@ export const UpdateAthleteForm = ({ athleteId }) => {
           <div>
             <label htmlFor="sports">Deporte</label>
             <select
+              id="sports"
               name="sports"
               {...register("sports")}
-              defaultValue={defaultSport}
-              defaultChecked={defaultSport}
+              //defaultValue={defaultSport?.name ? defaultSport?.name : ""}
+              //defaultChecked={defaultSport?.name}
             >
-              <option selected>{defaultSport}</option>
+              {/* <option
+                defaultValue
+                value={defaultSport?._id ? defaultSport?._id : ""}
+              >
+                {defaultSport?.name}
+              </option> */}
+
               {stateSport.dataSport.map((sport, index) => (
                 <option key={index} value={sport._id}>
                   {sport.name}

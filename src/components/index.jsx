@@ -13,3 +13,4 @@ export * from "./Forms/UserForm";
 export * from "./Comments/CommentCard";
 export * from "./Comments/CommentsList";
 export * from "./Sports/SportBar";
+export * from "./Header/HeaderBar";
